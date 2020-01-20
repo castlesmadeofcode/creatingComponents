@@ -78,20 +78,13 @@ const students = [
 
 
 
-//create function to populate html element by using interpolation for the arguments.
-const createStudentComponent = (name, subject, info, score) => {
-    return `
-        <div class="student">
-            <h1>${name}</h1>
-            <section>${subject}</section>
-            <aside>${info}</aside>
-        </div>
-    `
+
+const createStudentComponent = (obj) => {
+    return obj;
+   
 }
 
 
-// Iterate the array of students, and apply the correct style to the h1 depending
-//  on the score of the student being below 60, or above it.
 
 const studentContainer = document.querySelector("#container")
 

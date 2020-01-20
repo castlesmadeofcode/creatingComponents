@@ -76,29 +76,43 @@ const students = [
 
 
 
-//store a reference to an existing HTML element
-const studentContainer = document.querySelector("#container")
+
 
 //create function to populate html element by using interpolation for the arguments.
-const createStudentComponentShorthand = (name, subject, info, score) => {
+const createStudentComponent = (name, subject, info, score) => {
     return `
-        <div class="student ${score < 60 ? 'failing' : ''}">
+        <div class="student">
             <h1>${name}</h1>
             <section>${subject}</section>
             <aside>${info}</aside>
-            <aside>${score}</>
         </div>
     `
 }
 
-// Now that you have a function that dynamically builds HTML strings based on its input
-//  (via arguments), now you can iterate the array of students and use the function.
-for (let i = 0; i < students.length; i++) {
-    const student = students[i]
-    studentContainer.innerHTML += createStudentComponentShorthand(
-        student.name,
-        student.subject,
-        student.info,
-        student.score
-    )
+
+// Iterate the array of students, and apply the correct style to the h1 depending
+//  on the score of the student being below 60, or above it.
+
+const studentContainer = document.querySelector("#container")
+
+for (const student of students) {
+    let studentComponent = "";
+    if (student.score >= 60) {
+        studentComponent = `
+        <div class="student">
+            <h1 class="xx-large passing">${student.name}</h1>
+            <section class="bordered dashed section--padded">${student.subject}</section>
+            <aside class="pushRight">${student.info}</aside>
+        </div>
+    `
+    } else {
+        studentComponent = `
+        <div class="student">
+            <h1 class="xx-large failing">${student.name}</h1>
+            <section class="bordered dashed section--padded">${student.subject}</section>
+            <aside class="pushRight">${student.info}</aside>
+        </div>
+    `
+    }
+    studentContainer.innerHTML += createStudentComponent(studentComponent)
 }

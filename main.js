@@ -80,12 +80,13 @@ const failClass = "class= 'xx-large failing'";
 let passFail;
 
 
-const createStudentComponent = (passFail, name, subject, info) => {
+const createStudentComponent = (passFail, obj) => {
+    console.log(obj)
     return `
         <div class="student">
-            <h1 ${passFail}> ${name}</h1>
-            <section class="bordered dashed section--padded">${subject}</section>
-            <aside class="pushRight">${info}</aside>
+            <h1 ${passFail}> ${obj.name}</h1>
+            <section class="bordered dashed section--padded">${obj.subject}</section>
+            <aside class="pushRight">${obj.info}</aside>
         </div>
     `
 }
@@ -97,15 +98,11 @@ for (const student of students) {
     if (student.score >= 60) {
         studentContainer.innerHTML += createStudentComponent(
             passFail = passClass,
-            student.name,
-            student.subject,
-            student.info)
+           student)
     } else {
 
         studentContainer.innerHTML += createStudentComponent(
             passFail = failClass,
-            student.name,
-            student.subject,
-            student.info)
+            student)
     }
 }
